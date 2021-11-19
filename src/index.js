@@ -1,86 +1,11 @@
+const { response } = require('express');
 const express = require('express')
-
-const api = [
-    {
-      id: 2,
-      album: 'Titulo de amor',
-      lanzamiento: 1993,
-      artistas: 'Diomedes Diaz &  Juancho Rois',
-      genero: 'vallenato',
-      disquera: 'Sony Music',
-      trackList: [
-        {
-          id: 1,
-          nombre: 'Mi primera cana',
-          compositor: {
-            id: 3,
-            nombre: 'Diomedes Diaz'
-          },
-          duracion: '4:20'
-        },
-        {
-          id: 2,
-          nombre: 'Dejala',
-          compositor: {
-            id: 4,
-            nombre: 'Juan Humberto Rois'
-          },
-          duracion: '5:00'
-        },
-        {
-          id:3,
-          nombre: 'Conmigo si te va a da',
-          compositor: {
-            id: 3,
-            nombre: 'Aurelio Nuñez'
-          },
-          duracion: '4:57'
-        }
-      ]
-    },
-    {
-      id: 1,
-      album: 'Mi vida musical',
-      lanzamiento: 1991,
-      artistas: 'Diomedes Diaz &  Juancho Rois',
-      genero: 'vallenato',
-      disquera: 'Sony Music',
-      trackList: [
-        {
-            id: 1,
-          nombre: 'Doblaron las campanas',
-          compositor: {
-            id: 1,
-            nombre: 'Efren Calderon'
-          },
-          duracion: '5:09'
-        },
-        {
-            id: 2,
-          nombre: 'Parranda, ron y mujer',
-          compositor: {
-            id: 2,
-            nombre: 'Romualdo Brito'
-          },
-          duracion: '5:30'
-        },
-        {
-          id:3,
-          nombre: 'Mi ahijado',
-          compositor: {
-            id: 2,
-            nombre: 'Diomedez Diaz'
-          },
-          duracion: '4:35'
-        }
-      ]
-    }
-  ];
-
-
+const api = require('./api')
 const app = express();
 
 const PORT = 3001;
+
+app.use(express.json()) //para obtener el pbjeto body de la request
 
 app.get('/', (req, res)=> {
     res.status(200).json({
@@ -95,9 +20,28 @@ app.get('/api/v1/colombian-music/diomedes-diaz', (req, res) => {
 app.get('/api/v1/colombian-music/diomedes-diaz/:id', (req, res)=>{
     const {id} = req.params;
     const payload = api.find(item => item.id === parseInt(id))
-    res.json(payload)
+    if(payload){
+        res.json(payload)
+    } else{
+        res.status(404).json({
+            message: "Disco no encontrado"
+        })
+    }
 })
 
+app.delete('/api/v1/colombian-music/diomedes-diaz/:id', (req, res)=>{
+    const id = parseInt(req.params.id);
+    const disc = api.filter(item => item.id != id);
+    res.status(204).end();
+})
+
+app.post('/api/v1/colombian-music/diomedes-diaz', (req, res)=>{
+   const newData = req.body;
+   res.status(201).json({
+       message: "Se ha insertado con exito",
+       data: newData,
+   })
+})
 
 app.listen(PORT, ()=> {
     console.log(`Server run on: http://localhost:${PORT}`);
