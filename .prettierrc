@@ -1,8 +1,9 @@
 {
+    "semi": false,
     "singleQuote": true,
     "parser": "json",
     "trailingComma": "none",
     "endOfLine": "auto",
     "tabWidth": 2,
-    "quoteProps": "as-needed"
+    "printWidth": 80
 }

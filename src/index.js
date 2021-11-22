@@ -1,19 +1,22 @@
-const { response } = require('express');
 const express = require('express')
-const api = require('./api')
-const app = express();
+const helmet = require('helmet')
+const routesOfMusic = require('./routes/')
 
+const app = express();
 const PORT = 3001;
 
-app.use(express.json()) //para obtener el pbjeto body de la request
+app.use(helmet())
+app.use(express.json()) //para obtener el objeto body de la request en formato JSON
 
 app.get('/', (req, res)=> {
     res.status(200).json({
-        "Discografia Diomedez Diaz": `http://localhost:${PORT}/api/v1/colombian-music/diomedes-diaz`,
+        "Discografia Diomedez Diaz": `http://localhost:${PORT}/api/v1/music/diomedes-diaz`,
     })
 })
 
-app.get('/api/v1/colombian-music/diomedes-diaz', (req, res) => {
+routesOfMusic(app)
+
+/* app.get('/api/v1/colombian-music/diomedes-diaz', (req, res) => {
    res.json(api)
 })
 
@@ -32,7 +35,7 @@ app.get('/api/v1/colombian-music/diomedes-diaz/:id', (req, res)=>{
 app.delete('/api/v1/colombian-music/diomedes-diaz/:id', (req, res)=>{
     const id = parseInt(req.params.id);
     const disc = api.filter(item => item.id != id);
-    res.status(204).end();
+    res.status(204).end()
 })
 
 app.post('/api/v1/colombian-music/diomedes-diaz', (req, res)=>{
@@ -41,7 +44,7 @@ app.post('/api/v1/colombian-music/diomedes-diaz', (req, res)=>{
        message: "Se ha insertado con exito",
        data: newData,
    })
-})
+}) */
 
 app.listen(PORT, ()=> {
     console.log(`Server run on: http://localhost:${PORT}`);

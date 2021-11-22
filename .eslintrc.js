@@ -6,9 +6,6 @@ module.exports = {
 	},
 	extends: [
 		'standard',
-		'plugin:plugin-import/recommended',
-		'plugin:plugin-node/recommended',
-		'plugin:plugin-promise/recommended',
 		'prettier',
 	],
 	parserOptions: {
