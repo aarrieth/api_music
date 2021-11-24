@@ -1,6 +1,6 @@
 module.exports = [
   {
-    id: 2,
+    id: "2",
     album: 'Titulo de amor',
     lanzamiento: 1993,
     artistas: 'Diomedes Diaz &  Juancho Rois',
@@ -9,7 +9,7 @@ module.exports = [
     trackList: [ "Mi primera cana", "Dejala", "Conmigo si te va a da"]
   },
   {
-    id: 1,
+    id: "1",
     album: 'Mi vida musical',
     lanzamiento: 1991,
     artistas: 'Diomedes Diaz &  Juancho Rois',
