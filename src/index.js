@@ -1,5 +1,4 @@
 const express = require('express')
-<<<<<<< HEAD
 const helmet = require('helmet')
 const routesOfMusic = require('./routes/')
 
@@ -16,9 +15,8 @@ app.get('/', async (req, res)=> {
         "Discografia Diomedez Diaz": `${fullUrl}api/v1/music/diomedes-diaz`,
     })
 })
-=======
+
 const app = express()
->>>>>>> deploy
 
 routesOfMusic(app)
 
