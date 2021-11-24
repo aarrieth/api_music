@@ -3,7 +3,7 @@ const helmet = require('helmet')
 const routesOfMusic = require('./routes/')
 
 const app = express()
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 
 app.use(helmet())
 app.use(express.json()) //para obtener el objeto body de la request en formato JSON
@@ -15,8 +15,6 @@ app.get('/', async (req, res)=> {
         "Discografia Diomedez Diaz": `${fullUrl}api/v1/music/diomedes-diaz`,
     })
 })
-
-const app = express()
 
 routesOfMusic(app)
 
